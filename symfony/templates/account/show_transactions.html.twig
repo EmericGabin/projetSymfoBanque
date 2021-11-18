@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voici tes transactions !{% endblock %}
+
+{% block body %}
+
+    <table class="table table-striped">
+        {% for transac in account.debitTransaction|merge(account.creditTransaction)|sort((a,b) => a.date > b.date) %}
+            <tr>
+                <td>{{transac.id}}</td>
+                <td>{{transac.libelle}}</td>
+                <td>{{transac.date|date('Y-m-d H:i') }}</td>
+                <td>{% if transac.montant < 0 %}
+                    {{transac.montant}}
+                    {% endif %}
+                </td>
+                <td>{% if transac.montant >= 0 %}
+                    {{transac.montant}}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

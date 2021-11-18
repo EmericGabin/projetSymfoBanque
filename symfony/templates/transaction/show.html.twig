@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transaction{% endblock %}
+
+{% block body %}
+    <h1>Transaction</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ transaction.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ transaction.date ? transaction.date|date('d-m-Y H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ transaction.montant }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ transaction.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Iban débiteur</th>
+                <td>{{ transaction.debitAccount.Iban }}</td>
+            </tr>
+            <tr>
+                <th>Iban créditeur</th>
+                <td>{{ transaction.creditAccount.Iban }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('transaction_index') }}">back to list</a>
+    <a class="btn btn-warning" href="{{ path('transaction_edit', {'id': transaction.id}) }}">edit</a>
+    <br/>
+    <br/>
+    {{ include('transaction/_delete_form.html.twig') }}
+{% endblock %}

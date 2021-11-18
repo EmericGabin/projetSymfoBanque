@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account index{% endblock %}
+
+{% block body %}
+    <h1>Account index</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Iban</th>
+                <th>Balance</th>
+                <th>Type</th>``
+                <th>Owner</th>
+                <th>Min Balance</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for account in accounts %}
+            <tr>
+                <td>{{ account.id }}</td>
+                <td>{{ account.iban }}</td>
+                <td>{{ account.balance }}</td>
+                <td>{{ account.type }}</td>
+                <td>{{ account.owner.email }}</td>
+                <td>{{ account.limitDecouvert }}</td>
+
+                <td>
+                    <a class="btn btn-info" href="{{ path('account_show', {'id': account.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('account_edit', {'id': account.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('account_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,17 @@
+
+   
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+
+<div >
+    <h1>Hello! ✅</h1>
+    <ul>
+        <li><a href="{{ path('account_index') }}">Account</a></li>
+        <li><a href="{{ path('owner_index') }}">Owner</a></li>
+        <li><a href="{{ path('transaction_index') }}">Transaction</a></li>
+    </ul>
+</div>
+{% endblock %}

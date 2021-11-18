@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transaction index{% endblock %}
+
+{% block body %}
+    <h1>Transaction index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Montant</th>
+                <th>Libelle</th>
+                <th>débiteur</th>
+                <th>créancier</th>
+                <th>actions</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.date ? transaction.date|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ transaction.montant }}</td>
+                <td>{{ transaction.libelle }}</td>
+                <td>{{ transaction.debitAccount.owner.firstname }}</td>
+                <td>{{ transaction.creditAccount.owner.firstname }}</td>
+
+                
+                <td>
+                    <a class="btn btn-info" href="{{ path('transaction_show', {'id': transaction.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('transaction_edit', {'id': transaction.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
